@@ -20,6 +20,7 @@ This project is based off the Open Source Unity Simulator from Udacity and its S
   - Any command line argument passed to `main.py` will be given to the constructor of your Controller as a string array.
 - You are expected to implement at least lateral lateral control (steering angle) control in a the `Controller` class. PID Control is a simple choice, but you may use another controller if you describe it your report. 
 - For longitudinal control, you should decide on the target speed by yourself. You should start with a low target speed while implementing lateral control, and then progressively raise it. An ideal solution could set the target speed dynamically based on road curvature in order to maximize speed while staying on course.
+- **Important note for students working in pairs**: Since the simulator may run at noticeably different frame rates depending on the hardware used to run it, the same PID parameters may not work on two different machines. To solve this problem, you can use the `simulator_time` variable to decide to only recompute the control at a given rate. For example, you may decide to skip messages that come faster than 20Hz by only returning the control signal computed at the previous step. This is not mandatory for the assignment, but will help you if you plan on working on different machines using a single set of PID parameters.
 
 ## Deliverables
 

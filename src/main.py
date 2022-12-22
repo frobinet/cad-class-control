@@ -12,6 +12,7 @@ from controller import Controller
 from pathlib import Path
 import sys
 from typing import Dict, Any
+from datetime import datetime
 
 
 def create_message(steering_signal: float, throttle_signal: float):
@@ -48,8 +49,9 @@ async def echo(websocket):
             else:
                 # Compute new control signals and send response
                 del msg["image"] # We don't need the raw image
+                now = datetime.now()
                 steering_angle, throttle, speed, cross_track_error = [float(msg[k]) for k in ["steering_angle", "throttle", "speed", "cte"]]
-                steering_signal, throttle_signal = controller.compute_new_control(steering_angle, throttle, speed, cross_track_error)
+                steering_signal, throttle_signal = controller.compute_new_control(steering_angle, throttle, speed, cross_track_error, now)
                 response = create_message(steering_signal, throttle_signal)
                 # Log data to csv for analysis
                 csv_data = {**msg, "steering_signal": steering_signal, "throttle_signal": throttle_signal}
